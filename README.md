@@ -25,6 +25,16 @@ react-native link
 	*	Make sure you have an `Android emulator` installed and running
 	*	Run `react-native run-android` in your terminal
 
+## Actor
+### User
+- Apply loan by pre-defined terms (1 week, 1 month, 3 months, 6 months or 12 months)
+- Pay loan
+
+### Approver
+- Approve/Reject loan 
+- Check status loan
+
+
 ## Video Demo
 ![Image](miniaspire.gif)
 
