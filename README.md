@@ -30,11 +30,14 @@ react-native link
 
 ## Images Demo
 - Home
+
 ![Image](https://i.imgur.com/ab7B5Er.png)
 
 - Rejected
+
 ![Image](https://i.imgur.com/TJiXu4V.png)
 
 - Rejected list
+
 ![Image](https://i.imgur.com/OzWB3vk.png)
 
