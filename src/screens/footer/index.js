@@ -11,7 +11,8 @@ import {
   Body,
   Right,
   List,
-  ListItem
+  ListItem,
+  Footer
 } from "native-base";
 import styles from "./styles";
 
@@ -72,6 +73,12 @@ class NHFooter extends Component {
               </ListItem>}
           />
         </Content>
+
+        <Footer>
+          <Text>
+            Next time to pay loan: 11-11-2012 12:2:1
+          </Text>
+        </Footer>
       </Container>
     );
   }

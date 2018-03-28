@@ -77,7 +77,13 @@ import AdvancedDeck from "./screens/deckswiper/advanced";
 import Home from "./screens/home/";
 import Approver from "./screens/approver/";
 import Approver1 from "./screens/approver/1/";
+
 import User from "./screens/user/";
+import UserApplyLoan from "./screens/user/ApplyLoan";
+import UserApplyLoanSuccess from "./screens/user/ApplyLoanSuccess";
+import UserLoanStatus from "./screens/user/LoanStatus";
+import UserPayLoan from "./screens/user/PayLoan";
+
 import Anatomy from "./screens/anatomy/";
 import Footer from "./screens/footer/";
 import NHBadge from "./screens/badge/";
@@ -110,8 +116,15 @@ import Actionsheet from "./screens/actionsheet";
 const Drawer = DrawerNavigator(
   {
     Home: { screen: Home },
+
     Approver: { screen: Approver },
+
     User: { screen: User },
+    UserApplyLoan: { screen: UserApplyLoan },
+    UserApplyLoanSuccess: { screen: UserApplyLoanSuccess },
+    UserLoanStatus: { screen: UserLoanStatus },
+    UserPayLoan: { screen: UserPayLoan },
+
     Anatomy: { screen: Anatomy },
     Header: { screen: Header },
     Footer: { screen: Footer },
@@ -141,7 +154,7 @@ const Drawer = DrawerNavigator(
     Actionsheet: { screen: Actionsheet }
   },
   {
-    initialRouteName: "User",
+    initialRouteName: "Home",
     contentOptions: {
       activeTintColor: "#e91e63"
     },
@@ -154,7 +167,12 @@ const AppNavigator = StackNavigator(
     Drawer: { screen: Drawer },
 
     Approver1: { screen: Approver1 },
+
     User: { screen: User },
+    ApplyLoan: { screen: UserApplyLoan },
+    ApplyLoanSuccess: { screen: UserApplyLoanSuccess },
+    LoanStatus: { screen: UserLoanStatus },
+    PayLoan: { screen: UserPayLoan },
 
     Header1: { screen: Header1 },
     Header2: { screen: Header2 },
@@ -249,5 +267,5 @@ const AppNavigator = StackNavigator(
 
 export default () =>
   <Root>
-    <AppNavigator />
+    <AppNavigator/>
   </Root>;
