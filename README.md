@@ -1,13 +1,13 @@
 # React Native Project
 
 ## Requirements
-[x] User apply loan
-[x] User pay loan
-[x] User check loan status
-[x] Approver approve loan
-[x] Approver check loan status
-[] Deploy to `Expo`
-[] Add redux to manage actions and events
+- [x] User apply loan
+- [x] User pay loan
+- [x] User check loan status
+- [x] Approver approve loan
+- [x] Approver check loan status
+- [ ] Deploy to `Expo`
+- [ ] Add redux to manage actions and events
 
 ## Installation
 
