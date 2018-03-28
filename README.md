@@ -26,4 +26,4 @@ react-native link
 	*	Run `react-native run-android` in your terminal
 
 ## Video Demo
-![Image](https://i.imgur.com/QgB6bZt.mp4)
+![Image](miniaspire.gif)
