@@ -6,6 +6,7 @@
 - [x] User check loan status
 - [x] Approver approve loan
 - [x] Approver check loan status
+- [ ] Send FCM notification to user when loan status change and apply new loan
 - [ ] Deploy to `Expo`
 - [ ] Add redux to manage actions and events
 
