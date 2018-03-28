@@ -11,118 +11,69 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      user: ''
+      user: '',
+      loans: [],
+      schedules: []
     }
   }
 
   componentDidMount() {
-    let config = {
-      apiKey: "AIzaSyDaL5hl_8CtvkSwdiRs7MMk31mEP58qDBw",
-      authDomain: "miniaspireapp.firebaseapp.com",
-      databaseURL: "https://miniaspireapp.firebaseio.com",
-      projectId: "miniaspireapp",
-      storageBucket: "miniaspireapp.appspot.com",
-      messagingSenderId: "751163378904"
-    };
-
-    console.log(config)
-
-    let now = moment();
-    let created = updated = now.format("D-M-Y hh:mm:ss");
-
-    // var data = firebase.database().ref('/keys').push({
-    //   id: 1,
-    //   username: 'baonk',
-    //   name: 'Bao Nguyen',
-    //   create: created,
-    //   updated: updated
-    // })
-
-    // firebase.database().ref('/users').set(
-    //   [
-    //     {
-    //       id: 1,
-    //       username: 'baonk',
-    //       name: 'Bao Nguyen',
-    //       create: created,
-    //       updated: updated
-    //     },
-    //     {
-    //       id: 2,
-    //       username: 'jane',
-    //       name: 'Jane',
-    //       create: created,
-    //       updated: updated
-    //     },
-    //     {
-    //       id: 3,
-    //       username: 'leo',
-    //       name: 'Leo Ong',
-    //       create: created,
-    //       updated: updated
-    //     },
-    //   ],
-    // )
-    //
-    //
-    // // Define terms
-    // firebase.database().ref('/terms').set(
-    //   [
-    //     {
-    //       id: 1,
-    //       label: 'Monthly',
-    //       value: 4
-    //     },
-    //     {
-    //       id: 2,
-    //       label: 'Weekly',
-    //       value: 1
-    //     },
-    //     {
-    //       id: 1,
-    //       label: 'Twice a week',
-    //       value: 2
-    //     },
-    //   ]
-    // )
-    //
-    // // Schedule
-    // firebase.database().ref('/schedules').set(
-    //   [
-    //     {
-    //       id: 1,
-    //       loan_id: 1,
-    //       user_id: 1,
-    //       start: created,
-    //       end: updated,
-    //       status: 1
-    //     },
-    //     {
-    //       id: 2,
-    //       loan_id: 1,
-    //       user_id: 1,
-    //       start: created,
-    //       end: updated,
-    //       status: 1
-    //     },
-    //     {
-    //       id: 3,
-    //       loan_id: 1,
-    //       user_id: 1,
-    //       start: created,
-    //       end: updated,
-    //       status: 1
-    //     },
-    //   ]
-    // )
-
-
     // Load
     firebase.database().ref('/users').on('value', (snapshot) => {
       this.setState({ user: (snapshot.val()[0]) })
-
     });
 
+    let loans = []
+    loans['confirmed'] = [];
+
+    firebase.database().ref('/schedules').on('value', (snapshotSchedule) => {
+      if (typeof snapshotSchedule !== 'undefined' && snapshotSchedule.val() !== null) {
+        let schedules = Object.values(snapshotSchedule.val());
+        schedules.sort(function (a, b) {
+          return a.sequence - b.sequence;
+        });
+        this.setState({ schedules })
+      }
+    });
+
+    firebase.database().ref('/loans').on('value', (snapshotLoan) => {
+      if (typeof snapshotLoan !== 'undefined' && snapshotLoan.val() !== null) {
+        let snapshot = snapshotLoan.val();
+        for (key in snapshot) {
+          let value = snapshot[key];
+          value.key = key
+          if (snapshot[key].status === 'confirmed') {
+            loans['confirmed'].push(value);
+          }
+        }
+        this.setState({ loans })
+      }
+    });
+  }
+
+  getNextPaymentTerm() {
+    let nextTerm = ''
+    let loans = this.state.loans
+    if (typeof loans['confirmed'] !== 'undefined' && loans['confirmed'].length > 0) {
+      for (a in loans['confirmed']) {
+
+        if (typeof this.state.schedules !== 'undefined' && this.state.schedules.length > 0) {
+          for (let i = 0; i < this.state.schedules.length; i++) {
+            if (this.state.schedules[i].loan_id === loans['confirmed'][a].key) {
+              let active = moment().isBetween(this.state.schedules[i].start, this.state.schedules[i].end);
+              if (!active) {
+                console.log(this.state.schedules[i], active)
+                nextTerm =this.state.schedules[i].start
+                break;
+              }
+
+            }
+          }
+        }
+
+      }
+    }
+    return nextTerm;
   }
 
   render() {
@@ -179,9 +130,11 @@ class Home extends Component {
           </View>
         </Content>
         <Footer>
-          <Text style={styles.footerText}>
-            Next time to pay loan: 11-11-2012 12:2:1
-          </Text>
+         <View>
+           <Text style={styles.footerText}>
+             Next term: {this.getNextPaymentTerm()}
+           </Text>
+         </View>
         </Footer>
       </Container>
     );

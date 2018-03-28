@@ -24,18 +24,29 @@ class Home extends Component {
           <Right/>
         </Header>
 
-        <View style={styles.logoContainer}>
+        <Content style={{ flex: 1, backgroundColor: '#FFF' }}>
+          <View style={styles.container}>
+            <Button
+              style={[styles.actionButton, { backgroundColor: '#639fff' }]}
+              onPress={() => this.props.navigation.navigate("ApproveLoan")}
+            >
+              <Text style={styles.actionText}>List Loans</Text>
+            </Button>
 
-          <Button
-            style={[styles.actionButton, { backgroundColor: '#639fff' }]}
-            onPress={() => this.props.navigation.navigate("Approver1")}
-          >
-            <Text style={styles.actionText}>Approver</Text>
-          </Button>
+            <Text style={styles.note}>(Click to approve Loans)</Text>
 
-          <Text style={styles.note}>(This place is for approver tracking loans.</Text>
+            <View style={{ height: 5, backgroundColor: '#CCC', width: 200, margin: 40 }}>
+            </View>
 
-        </View>
+            <Button
+              style={[styles.actionButton, { backgroundColor: '#4fdda5' }]}
+              onPress={() => this.props.navigation.navigate("ApproveLoanStatus")}
+            >
+              <Text style={styles.actionText}>Loan Status</Text>
+            </Button>
+            <Text style={styles.note}>(View current load and loan history)</Text>
+          </View>
+        </Content>
       </Container>
     );
   }

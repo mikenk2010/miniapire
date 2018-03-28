@@ -115,11 +115,6 @@ class ApplyLoan extends Component {
       }
     )
 
-    console.log('=--------------')
-    console.log(loan)
-    console.log(loan.key)
-    console.log('=--------------')
-
     // Generate schedule
     let loan_id = loan.key
     for (let i = 0; i < term; i++) {

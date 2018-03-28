@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Alert, View, StatusBar, TextInput, TouchableOpacity } from "react-native";
+import { Alert, View, StatusBar, TextInput } from "react-native";
 import {
   Container,
   Header,
@@ -29,9 +29,7 @@ import moment from 'moment'
 
 import styles from "./styles";
 
-const Item = Picker.Item;
-
-class PayLoan extends Component {
+class ApproveLoanStatus extends Component {
   constructor(props) {
     super(props);
 
@@ -48,37 +46,31 @@ class PayLoan extends Component {
     loans['approving'] = [];
     loans['confirmed'] = [];
 
-    firebase.database().ref('/schedules').on('value', (snapshot) => {
-      if (typeof snapshot !== 'undefined' && snapshot.val() !== null) {
-        let snapshots = snapshot.val();
-        for (key in snapshots) {
-          snapshots[key].key = key
-        }
-
-        let schedules = Object.values(snapshots);
+    firebase.database().ref('/schedules').on('value', (snapshotSchedule) => {
+      if (typeof snapshotSchedule !== 'undefined' && snapshotSchedule.val() !== null) {
+        let schedules = Object.values(snapshotSchedule.val());
         schedules.sort(function (a, b) {
           return a.sequence - b.sequence;
         });
-
         this.setState({ schedules })
       }
     });
 
-
-    firebase.database().ref('/loans').on('value', (snapshot) => {
-      if (typeof snapshot !== 'undefined' && snapshot.val() !== null) {
-        snapshot = snapshot.val()
+    firebase.database().ref('/loans').on('value', (snapshotLoan) => {
+      if (typeof snapshotLoan !== 'undefined' && snapshotLoan.val() !== null) {
+        let snapshot = snapshotLoan.val();
         for (key in snapshot) {
-          var value = snapshot[key];
+          let value = snapshot[key];
           value.key = key
-          if (snapshot[key].status == 'rejected') {
+          if (snapshot[key].status === 'rejected') {
             loans['rejected'].push(value);
-          } else if (snapshot[key].status == 'approving') {
+          } else if (snapshot[key].status === 'approving') {
             loans['approving'].push(value);
-          } else if (snapshot[key].status == 'confirmed') {
+          } else if (snapshot[key].status === 'confirmed') {
             loans['confirmed'].push(value);
           }
         }
+
 
         this.setState({ loans })
       }
@@ -89,55 +81,16 @@ class PayLoan extends Component {
     return Number(num).toLocaleString()
   }
 
-  validatePayTerm = (loan_id, status, active, key, start) => {
-    if (status === 0 && active) {
-      Alert.alert(
-        'Are you sure to pay this term ?',
-        key,
-        [
-          { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-          { text: 'Yes, I\'m sure', onPress: () => this.purchaseLoan(key) },
-        ],
-        { cancelable: false }
-      )
-    } else {
-      if (status === 1 && active) {
-        Alert.alert(
-          'Success!',
-          'You already paid this term, please skip this!',
-          [
-            { text: 'Okie lah!', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-          ],
-          { cancelable: false }
-        )
-      } else {
-        Alert.alert(
-          'Notice!',
-          'This term is not yet reached, please wait to ' + start + ' date.',
-          [
-            { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-          ],
-          { cancelable: false }
-        )
-      }
-    }
-  }
-
-  purchaseLoan(key) {
-    let now = moment();
-    let updated = now.format("D-M-Y hh:mm:ss");
-    let schedule = firebase.database().ref('/schedules/' + key);
-    schedule.update({ status: 1, updated: updated })
-  }
-
   renderSchedule(key) {
     let schedules = [];
-    for (let i = 0; i < this.state.schedules.length; i++) {
-      if (this.state.schedules[i].loan_id === key) {
-        let active = moment().isBetween(this.state.schedules[i].start, this.state.schedules[i].end);
-        schedules.push(
-          <TouchableOpacity key={i} onPress={() => this.validatePayTerm(this.state.schedules[i].loan_id, this.state.schedules[i].status, active, this.state.schedules[i].key, this.state.schedules[i].start)}>
-            <View style={[styles.sequence, this.state.schedules[i].status === 1 ? styles.sequenceDone : active ? styles.sequenceActive : '']}>
+    let now = moment();
+    if (typeof this.state.schedules !== 'undefined' && this.state.schedules.length > 0) {
+      for (let i = 0; i < this.state.schedules.length; i++) {
+        if (this.state.schedules[i].loan_id === key) {
+          let active = moment().isBetween(this.state.schedules[i].start, this.state.schedules[i].end);
+
+          schedules.push(
+            <View key={i} style={[styles.sequence, active ? styles.sequenceActive : '']}>
               <Text style={[styles.sequenceText]}>
                 Sequence: {this.state.schedules[i].sequence}
               </Text>
@@ -151,25 +104,12 @@ class PayLoan extends Component {
                 End: {this.state.schedules[i].end}
               </Text>
             </View>
-          </TouchableOpacity>
-        )
+          )
+        }
       }
     }
 
     return schedules;
-  }
-
-  getCurrentState(key) {
-    let state = 0;
-    for (let i = 0; i < this.state.schedules.length; i++) {
-      if (this.state.schedules[i].loan_id === key) {
-        let active = moment().isBetween(this.state.schedules[i].start, this.state.schedules[i].end);
-        if (active && this.state.schedules[i].status === 1) {
-          state += 1;
-        }
-      }
-    }
-    return state
   }
 
   renderLoans(type) {
@@ -212,9 +152,6 @@ class PayLoan extends Component {
               <CardItem>
                 <Body>
                 <Text>
-                  Current state: {this.getCurrentState(loans[type][a].key)}/{loans[type][a].term}
-                </Text>
-                <Text>
                   Schedules
                 </Text>
                 {this.renderSchedule(loans[type][a].key)}
@@ -235,28 +172,48 @@ class PayLoan extends Component {
 
 
   render() {
+    debugger;
     return (
       <Container>
         <StatusBar barStyle="light-content"/>
         <Header>
           <Left>
-            <Button transparent onPress={() => this.props.navigation.navigate("User")}>
-              <Icon name="arrow-back"/>
+            <Button transparent onPress={() => this.props.navigation.goBack()}>
+              <Icon name="pulse"/>
             </Button>
           </Left>
           <Body>
-          <Title>Pay Loan</Title>
+          <Title>Loan Status </Title>
           </Body>
-          <Right/>
+          <Right>
+            <Text>[Admin]</Text>
+          </Right>
         </Header>
 
         <Content>
           <Separator bordered>
-            <Text>CURRENT LOAN YOU NEED TO CUT</Text>
+            <Text>APPROVING</Text>
+          </Separator>
+          <ListItem>
+            <View style={{ flexDirection: 'column', flex: 1 }}>
+              {this.renderLoans('approving').approving}
+            </View>
+          </ListItem>
+
+          <Separator bordered>
+            <Text>CONFIRMED</Text>
           </Separator>
           <ListItem>
             <View style={{ flexDirection: 'column', flex: 1 }}>
               {this.renderLoans('confirmed').confirmed}
+            </View>
+          </ListItem>
+          <Separator bordered>
+            <Text>REJECTED</Text>
+          </Separator>
+          <ListItem>
+            <View style={{ flexDirection: 'column', flex: 1 }}>
+              {this.renderLoans('rejected').rejected}
             </View>
           </ListItem>
 
@@ -268,4 +225,4 @@ class PayLoan extends Component {
   }
 }
 
-export default PayLoan;
+export default ApproveLoanStatus;

@@ -1,5 +1,4 @@
 apply plugin: "com.android.application"
-
 import com.android.build.OutputFile
 
 /**
@@ -95,7 +94,7 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.miniaspire"
@@ -137,10 +136,19 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-device-info')
+    compile (project(':react-native-device-info')){
+        exclude group: "com.google.android.gms"
+    }
     compile(project(':react-native-firebase')) {
         transitive = false
     }
+    // Firebase dependencies
+    compile "com.google.android.gms:play-services-base:11.8.0"
+    compile "com.google.firebase:firebase-core:11.8.0"
+    compile "com.google.firebase:firebase-database:11.8.0"
+
+    compile "com.google.firebase:firebase-auth:11.8.0"
+
     compile project(':react-native-vector-icons')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
@@ -153,3 +161,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+apply plugin: 'com.google.gms.google-services'

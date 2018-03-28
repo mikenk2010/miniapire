@@ -32,82 +32,8 @@ const Item = Picker.Item;
 class ApplyLoanSuccess extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      selectedItem: undefined,
-      term: "1",
-      text: "",
-      results: {
-        items: []
-      },
-      amount: '',
-      age: '',
-      bankAccount: '',
-      bankName: '',
-    };
   }
 
-  onValueChange(value: string) {
-    this.setState({
-      term: value
-    });
-  }
-
-  validateData() {
-    if (this.state.amount) {
-      let termLabel = "Months"
-      if (this.state.term == 1) {
-        termLabel = "Weekly"
-      }
-      Alert.alert(
-        'Summary your information',
-        'Amount: ' + this.state.amount + '\n' +
-        'Age: ' + this.state.age + '\n' +
-        'Bank Account: ' + this.state.bankAccount + '\n' +
-        'Bank Name: ' + this.state.bankName + '\n' +
-        'Term: ' + this.state.term + " " + termLabel,
-        [
-          { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-          { text: 'Apply Loan', onPress: () => this.applyLoan() },
-        ],
-        { cancelable: false }
-      )
-    } else {
-      Toast.show({
-        text: "Please enter amount",
-        style: {
-          backgroundColor: "red"
-        }
-      })
-    }
-  }
-
-  applyLoan() {
-    let now = moment();
-    let created = updated = now.format("D-M-Y hh:mm:ss");
-    let term = this.state.term > 1 ? this.state.term * 4 : 1;
-    // Create loan
-    // Loan
-    firebase.database().ref('/loans').push(
-      {
-        userId: 1,
-        created: created,
-        amount: this.state.amount,
-        status: 'applying',
-        term: term,
-        profile: {
-          bankName: this.state.bankName,
-          bankAccount: this.state.bankAccount,
-          age: this.state.age
-        }
-      }
-    )
-    // Generate schedule
-  }
-
-  formatAmount() {
-    return Number(this.state.amount).toLocaleString()
-  }
 
   render() {
     return (

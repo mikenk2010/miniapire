@@ -29,8 +29,6 @@ import moment from 'moment'
 
 import styles from "./styles";
 
-const Item = Picker.Item;
-
 class LoanStatus extends Component {
   constructor(props) {
     super(props);
@@ -42,6 +40,10 @@ class LoanStatus extends Component {
   }
 
   componentDidMount() {
+    this.callFirebase()
+  }
+
+  callFirebase(){
     // Load
     let loans = []
     loans['rejected'] = [];
@@ -73,7 +75,6 @@ class LoanStatus extends Component {
           }
         }
 
-
         this.setState({ loans })
       }
     });
@@ -84,14 +85,10 @@ class LoanStatus extends Component {
   }
 
   renderSchedule(key) {
-
     let schedules = [];
     let now = moment();
     if (typeof this.state.schedules !== 'undefined' && this.state.schedules.length > 0) {
       for (let i = 0; i < this.state.schedules.length; i++) {
-        console.log("SCHEDULE-----------" + key, this.state.schedules[i].loan_id )
-        console.log(this.state.schedules)
-        console.log("SCHEDULE-----------")
         if (this.state.schedules[i].loan_id === key) {
           let active = moment().isBetween(this.state.schedules[i].start, this.state.schedules[i].end);
 
@@ -184,7 +181,7 @@ class LoanStatus extends Component {
         <StatusBar barStyle="light-content"/>
         <Header>
           <Left>
-            <Button transparent onPress={() => this.props.navigation.navigate("User")}>
+            <Button transparent onPress={() => this.props.navigation.push('User')}>
               <Icon name="pulse"/>
             </Button>
           </Left>
