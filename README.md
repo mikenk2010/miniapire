@@ -14,16 +14,16 @@ The app should use an API architecture, where dummy data can be returned from th
 ```
 git clone xxxx
 cd MiniAspire
-yarn
+npm install
 react-native link
 ```
 
 *	**Run on iOS**
 	*	Run `react-native run-ios` in your terminal
 
-
 *	**Run on Android**
 	*	Make sure you have an `Android emulator` installed and running
 	*	Run `react-native run-android` in your terminal
 
-## Demo
+## Video Demo
+![alt text](https://i.imgur.com/QgB6bZt.mp4)
