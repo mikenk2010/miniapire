@@ -12,8 +12,8 @@ The app should use an API architecture, where dummy data can be returned from th
 
 *	**Clone and install packages**
 ```
-git clone xxxx
-cd MiniAspire
+git clone git@github.com:mikenk2010/miniapire.git
+cd miniapire
 npm install
 react-native link
 ```
