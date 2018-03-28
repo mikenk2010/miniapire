@@ -44,6 +44,10 @@ react-native link
 
 ![Image](https://i.imgur.com/ab7B5Er.png)
 
+- Apply Loan
+
+![Image](https://i.imgur.com/8QSKN90.png)
+
 - Rejected
 
 ![Image](https://i.imgur.com/TJiXu4V.png)
