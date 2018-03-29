@@ -1,10 +1,30 @@
 import React, { Component } from "react";
-import { ImageBackground, View, StatusBar } from "react-native";
+import { ImageBackground, View, StatusBar, NetInfo } from "react-native";
 import { Container, Button, H3, Text, Content, Left, Header, Icon, Body, Title, Right } from "native-base";
 
 import styles from "./styles";
 
 class Home extends Component {
+
+  componentDidMount() {
+    NetInfo.isConnected.fetch().then(isConnected => {
+      console.log('First, is ' + (isConnected ? 'online' : 'offline'));
+    });
+
+    function handleFirstConnectivityChange(isConnected) {
+      console.log('Then, is ' + (isConnected ? 'online' : 'offline'));
+      NetInfo.isConnected.removeEventListener(
+        'connectionChange',
+        handleFirstConnectivityChange
+      );
+    }
+
+    NetInfo.isConnected.addEventListener(
+      'connectionChange',
+      handleFirstConnectivityChange
+    );
+  }
+
   render() {
     return (
       <Container>

@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -691,6 +692,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 4J4XXB2TD9;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -1165,6 +1167,8 @@
 			baseConfigurationReference = 6F4BB7F6BCFE7D22A14FD9FB /* Pods-MiniAspire.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 4J4XXB2TD9;
@@ -1182,6 +1186,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bao.MiniAspire;
 				PRODUCT_NAME = MiniAspire;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1191,6 +1196,8 @@
 			baseConfigurationReference = 463534853FA6BD289151F989 /* Pods-MiniAspire.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4J4XXB2TD9;
 				HEADER_SEARCH_PATHS = (
@@ -1207,6 +1214,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bao.MiniAspire;
 				PRODUCT_NAME = MiniAspire;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

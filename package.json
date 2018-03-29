@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "color": "^3.0.0",
+    "expo": "^25.0.0",
     "firebase": "^4.12.0",
     "lodash": "^4.17.5",
     "moment": "^2.21.0",
