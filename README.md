@@ -32,6 +32,10 @@ react-native link
 - Apply loan by pre-defined terms (1 week, 1 month, 3 months, 6 months or 12 months)
 - Pay loan
 
+## Expo Demo
+https://expo.io/@bnzwanzig10/MiniAspire
+![Image](https://i.imgur.com/i4IoMss.png)
+
 ### Approver
 - Approve/Reject loan 
 - Check status loan
