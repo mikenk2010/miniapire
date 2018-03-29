@@ -34,6 +34,7 @@ react-native link
 
 ## Expo Demo
 https://expo.io/@bnzwanzig10/MiniAspire
+
 ![Image](https://i.imgur.com/i4IoMss.png)
 
 ### Approver
