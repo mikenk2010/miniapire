@@ -38,7 +38,7 @@
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		C76864200C0C44DFABBEE173 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E759372475E74079BBC485A3 /* Roboto_medium.ttf */; };
 		CF1BC5AFF34B42C98B7F7879 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5818D0209B624FF4A22131BD /* Zocial.ttf */; };
-		DCF58F6B206AACC6004D07EF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DCF58F6A206AACC6004D07EF /* GoogleService-Info.plist */; };
+		DC447ACA206E5D6F0023D491 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC447AA2206E5D6F0023D491 /* GoogleService-Info.plist */; };
 		F276996B57EB47EE9AFB4026 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99C033924048427DA16FD85A /* MaterialIcons.ttf */; };
 		FF670B4D85924866831AAA62 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C19948530A9645A19E6FA2A6 /* Foundation.ttf */; };
 /* End PBXBuildFile section */
@@ -360,7 +360,7 @@
 		B4BDD3C02D8049A1AEEFFE7E /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		C19948530A9645A19E6FA2A6 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		C5D5D312F4ED4F46A0A3381F /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; };
-		DCF58F6A206AACC6004D07EF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DC447AA2206E5D6F0023D491 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "MiniAspire/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DEA7AAA04F4046519A0BC120 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
 		E759372475E74079BBC485A3 /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		ED9CAF9B3060451CBA33FD9D /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
@@ -476,7 +476,7 @@
 		13B07FAE1A68108700A75B9A /* MiniAspire */ = {
 			isa = PBXGroup;
 			children = (
-				DCF58F6A206AACC6004D07EF /* GoogleService-Info.plist */,
+				DC447AA2206E5D6F0023D491 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1064,8 +1064,8 @@
 				6B6A5096024C42248C8DCFBF /* Octicons.ttf in Resources */,
 				C76864200C0C44DFABBEE173 /* Roboto_medium.ttf in Resources */,
 				79F283272EFF40F7A8EFA743 /* Roboto.ttf in Resources */,
+				DC447ACA206E5D6F0023D491 /* GoogleService-Info.plist in Resources */,
 				80FCC24A90EA4892AEB11903 /* rubicon-icon-font.ttf in Resources */,
-				DCF58F6B206AACC6004D07EF /* GoogleService-Info.plist in Resources */,
 				3F47E9171CB44C2E86BC852C /* SimpleLineIcons.ttf in Resources */,
 				CF1BC5AFF34B42C98B7F7879 /* Zocial.ttf in Resources */,
 				2AE44B402BF340CA903FBAD4 /* Feather.ttf in Resources */,
